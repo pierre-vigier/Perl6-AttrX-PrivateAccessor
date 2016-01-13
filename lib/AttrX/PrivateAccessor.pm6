@@ -14,11 +14,15 @@ multi trait_mod:<is>(Attribute:D $attr, :$providing-private-accessor! ) is expor
 
 =begin pod
 =head1 NAME
+
 AttrX::PrivateAccessor
+
 =head1 SYNOPSIS
+
 Provide private accessor for private attribute
 
 =head1 DESCRIPTION
+
 This module provides trait providing-private-accessor, which will create a private accessor for a private attribute
 It allows from within a class to access another instance of the same class' pricate attributes
 

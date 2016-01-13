@@ -2,14 +2,20 @@
 
 [![Build Status](https://travis-ci.org/pierre-vigier/Perl6-AttrX-PrivateAccessor.svg?branch=master)](https://travis-ci.org/pierre-vigier/Perl6-AttrX-PrivateAccessor)
 
-NAME AttrX::PrivateAccessor
-===========================
+NAME
+====
 
-SYNOPSIS Provide private accessor for private attribute
-=======================================================
+AttrX::PrivateAccessor
 
-DESCRIPTION This module provides trait providing-private-accessor, which will create a private accessor for a private attribute It allows from within a class to access another instance of the same class' pricate attributes
-==============================================================================================================================================================================================================================
+SYNOPSIS
+========
+
+Provide private accessor for private attribute
+
+DESCRIPTION
+===========
+
+This module provides trait providing-private-accessor, which will create a private accessor for a private attribute It allows from within a class to access another instance of the same class' pricate attributes
 
     use AttrX::PrivateAccessor;
 
