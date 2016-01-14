@@ -1,7 +1,8 @@
 {
+    "perl"          : "6.c",
     "name"          : "AttrX::PrivateAccessor",
     "version"       : "0.0.1",
-    "author"        : "github:pierre-vigier",
+    "authors"       : [ "github:pierre-vigier" ],
     "description"   : "Providing private accessors for private attributes",
     "depends"       : [ ],
     "provides" : {
