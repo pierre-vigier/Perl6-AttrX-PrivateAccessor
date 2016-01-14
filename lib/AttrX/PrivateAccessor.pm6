@@ -24,7 +24,7 @@ Provide private accessor for private attribute
 =head1 DESCRIPTION
 
 This module provides trait providing-private-accessor, which will create a private accessor for a private attribute
-It allows from within a class to access another instance of the same class' pricate attributes
+It allows from within a class to access another instance of the same class' private attributes
 
     use AttrX::PrivateAccessor;
 
@@ -41,5 +41,9 @@ is equivalent to
             return $!attribute;
         }
     }
+
+=head1 MISC
+
+To test the meta data of the modules, set environement variable PERL6_TEST_META to 1
 
 =end pod

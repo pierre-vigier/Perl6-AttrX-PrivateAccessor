@@ -32,3 +32,8 @@ is equivalent to
             return $!attribute;
         }
     }
+
+MISC
+====
+
+To test the meta data of the modules, set environement variable PERL6_TEST_META to 1
