@@ -2,7 +2,7 @@ use v6;
 use Test;
 use AttrX::PrivateAccessor;
 
-plan 2;
+plan 4;
 
 class Teenager {
     has $!diary is providing-private-accessor;
@@ -24,4 +24,25 @@ $steve.init( "steve's diary" );
 dies-ok { $bob.diary }, "No public method";
 is $steve.inspect( $bob ), "bob's diary", "Can access other instance's private attributes";
 
-#TODO: test duplicate method, private vs public, ...
+eval-dies-ok q[
+    use AttrX::PrivateAccessor;
+    class Duplicate {
+        has $!private is providing-private-accessor;
+
+        method !private() {
+            "Just need a private method";
+        }
+    }
+], "Collide as a private method with the same name already exists";
+
+eval-lives-ok q[
+    use AttrX::PrivateAccessor;
+    class NoCollision {
+        has $!private is providing-private-accessor;
+
+        method private() {
+            "Just need a public method";
+        }
+    }
+], "Does not collide with public method";
+
