@@ -15,7 +15,7 @@ Provide private accessor for private attribute
 DESCRIPTION
 ===========
 
-This module provides trait providing-private-accessor, which will create a private accessor for a private attribute It allows from within a class to access another instance of the same class' pricate attributes
+This module provides trait providing-private-accessor, which will create a private accessor for a private attribute It allows from within a class to access another instance of the same class' private attributes
 
     use AttrX::PrivateAccessor;
 
