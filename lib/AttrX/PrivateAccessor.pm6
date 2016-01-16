@@ -1,15 +1,29 @@
 unit module AttrX::PrivateAccessor:ver<v0.0.1>:auth<github:pierre-vigier>;
 
-multi trait_mod:<is>(Attribute:D $attr, :$providing-private-accessor! ) is export {
-    my $class = $attr.package;
-    my $name = $attr.name.substr(2); #drop the initial $!
-    if $name ~~ $class.^private_method_table {
-        die "A private method with attribute name already exists, can't create private accessor";
-    } else {
-        $class.^add_private_method($name, method (Mu:D:) {
-            $attr.get_value( self );
-        });
+role ProvidePrivateAccessor { }
+
+role ProvidePrivateAccessorContainer {
+    method BUILDALL(|) {
+        for self.^attributes.grep( * ~~ ProvidePrivateAccessor ) -> $attr {
+            #check if a pricate method has the same name
+            my $name = $attr.name.substr(2);
+            say $name;
+            if $name ~~ self.^private_method_table {
+                die "A private method '$name' already exists, can't create private accessor '$name' for attribute '\$!$name'.";
+            } else {
+                self.^add_private_method($name, method (Mu:D: ) {
+                    $attr.get_value( self );
+                });
+            }
+        }
+        callsame;
     }
+}
+
+multi sub trait_mod:<is>(Attribute $attr, :$providing-private-accessor!) is export {
+    $attr does ProvidePrivateAccessor;
+    #$attr.package.^add_role( ProvidePrivateAccessorContainer ) unless $attr.package.^roles_to_compose.grep( ProvidePrivateAccessorContainer );
+    $*PACKAGE.^add_role(ProvidePrivateAccessorContainer) unless $*PACKAGE.^roles_to_compose.first(ProvidePrivateAccessorContainer) !=== Nil;
 }
 
 =begin pod
