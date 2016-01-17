@@ -5,7 +5,7 @@ use AttrX::PrivateAccessor;
 plan 4;
 
 class Teenager {
-    has $!diary is providing-private-accessor;
+    has $!diary is private-accessible;
 
     method init( $value ) {
         $!diary = $value;
@@ -27,7 +27,7 @@ is $steve.inspect( $bob ), "bob's diary", "Can access other instance's private a
 eval-dies-ok q[
     use AttrX::PrivateAccessor;
     class Duplicate {
-        has $!private is providing-private-accessor;
+        has $!private is private-accessible;
 
         method !private() {
             "Just need a private method";
@@ -38,11 +38,10 @@ eval-dies-ok q[
 eval-lives-ok q[
     use AttrX::PrivateAccessor;
     class NoCollision {
-        has $!private is providing-private-accessor;
+        has $!private is private-accessible;
 
         method private() {
             "Just need a public method";
         }
     }
 ], "Does not collide with public method";
-
