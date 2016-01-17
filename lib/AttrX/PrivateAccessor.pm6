@@ -16,6 +16,13 @@ my role PrivateAccessorContainerHOW {
                     message =>"A private method '{$attr.private-accessor-name}' already exists, can't create private accessor for accessot '\$!{$attr.private-accessor-name}'"
                 ).throw();
             }
+            for type.^roles_to_compose -> $r {
+                if $attr.private-accessor-name ~~ $r.new.^private_method_table {
+                    X::Usage.new(
+                        message =>"A private method '{$attr.private-accessor-name}' is provided by role '{$r.WHAT.^name}', can't create private accessor for accessot '\$!{$attr.private-accessor-name}'"
+                    ).throw();
+                }
+            }
 
             type.^add_private_method($attr.private-accessor-name, method (Mu:D:) {
                   $attr.get_value( self );
